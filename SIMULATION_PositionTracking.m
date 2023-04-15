@@ -3,7 +3,7 @@ clear all;
 close all;
 
 % time between measurements (seconds)
-dt = 1;
+dt = 0.5;
 
 % State vector - describes position, velocity
 x = [0; 0];
@@ -19,15 +19,16 @@ B = [0.5*dt*dt; dt];
 Q = [0.25 0; 0 0.25];
 
 % Measurement vector - velocity
-z = [1];
-H = [dt 1];
+z = [u*dt];
+H = [0 1];
 R = [1];
 
 % Prediction step
 x = F*x + B*u
 P = F*P*F' + Q
 
+
 % Update step
-K = P*H'*inv(H*P*H' + R)
+K = P*H'*inv(H*P*H' + R);
 x = x + K*(z - H*x)
 P = (eye(2) - K*H)*P*(eye(2) - K*H)' + K*R*K';
