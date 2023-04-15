@@ -55,5 +55,5 @@ function[x, P] = KalmanFilter(x, P, u, z)
     % Update step
     K = P*H'*inv(H*P*H' + R)
     x = x + K*(z - H*x)
-    P = (eye(4) - K*H)*P*(eye(4) - K*H)' + K*R*K';
+    P = (eye(length(x)) - K*H)*P*(eye(length(x)) - K*H)' + K*R*K';
 end
