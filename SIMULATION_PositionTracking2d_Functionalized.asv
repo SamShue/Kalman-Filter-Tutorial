@@ -2,7 +2,6 @@ clc;
 clear all;
 close all;
 
-% vector for tracking estimation history
 x_hist = [];
 
 % control signals
@@ -56,9 +55,8 @@ for ii = 1:length(acceleration_commands_noisy)
     hold on;
     xlim([0.0 4]); ylim([-0.25 1]);
     xlabel('meters'); ylabel('meters');
-    plot(x_hist(1, :), x_hist(3, :),'--o');
-    plot(position_measurements(1,1:ii), position_measurements(2,1:ii), '-o');
-    legend('estimated position', 'true position')
+    scatter(x(1), x(3), 'o', 'black', 'filled');
+    scatter(position_measurements(1,1:ii), position_measurements(2,1:ii), 'o', 'black');
     pause(1);
     % End render environment
     %----------------------------------------------------------------------

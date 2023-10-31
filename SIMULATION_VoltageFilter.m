@@ -7,15 +7,15 @@ sigma_measure = 0.1;
 
 signal = sin(0:0.01:4*pi);
 
-plot(signal);
+subplot(2,2,1); plot(signal); title('Original Signal')
 
 signal_control = signal + normrnd(0, sigma_control, size(signal));
 signal_measure = signal + normrnd(0, sigma_measure, size(signal));
 
-signal_filtered = zeros(size(signal));
+signal_filtered = zeros(size(signal)); 
 
-figure; plot(signal_control); 
-figure; plot(signal_measure);
+subplot(2,2,2); plot(signal_control); title('Signal as sensed by sensor 1 (used in control)')
+subplot(2,2,3); plot(signal_measure); title('Signal as sensed by sensor 2 (used in measurement)')
 
 x = 0;
 P = 1;
@@ -31,7 +31,7 @@ for ii = 1:length(signal_control)
 
 end
 
-figure; plot(signal_filtered);
+subplot(2,2,4); plot(signal_filtered); title('Filtered Signal')
 
 function[x, P] = KalmanFilter(x, P, u, z, sigma_u, sigma_z)
     % State transition matrix
