@@ -28,8 +28,8 @@ end
 
 
 % Gaussian noise std deviation
-u_sigma = 0.2;
-z_sigma = 0.1;
+u_sigma = 0.1;
+z_sigma = 0.25;
 
 % Add 0-mean gaussian noise to signals
 acceleration_commands_noisy = acceleration_commands + normrnd(0, u_sigma, size(acceleration_commands));
