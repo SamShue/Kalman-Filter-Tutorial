@@ -28,8 +28,8 @@ end
 
 
 % Gaussian noise std deviation
-u_sigma = 0.1;
-z_sigma = 0.25;
+u_sigma = 0.2;
+z_sigma = 0.1;
 
 % Add 0-mean gaussian noise to signals
 acceleration_commands_noisy = acceleration_commands + normrnd(0, u_sigma, size(acceleration_commands));
@@ -72,7 +72,7 @@ function[x, P] = KalmanFilter(x, P, u, z, u_sigma, z_sigma)
     % Control coefficient matrix - maps control vector into state vector space
     B = [0.5*dt*dt 0; dt 0; 0 0.5*dt*dt; 0 dt];
     % Process noise matrix
-    Q = F*u_sigma*F';
+    Q = B*u_sigma*B';
     % Observation matrix 
     H = [1 0 0 0; 0 0 1 0];
     % Measurement noise
@@ -80,7 +80,7 @@ function[x, P] = KalmanFilter(x, P, u, z, u_sigma, z_sigma)
     
     % Prediction step
     x = F*x + B*u;
-    P = F*P*F' + Q
+    P = F*P*F' + Q;
     
     % Update step
     y = z - H*x;
